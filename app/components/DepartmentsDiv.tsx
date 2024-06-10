@@ -32,6 +32,18 @@ const DepartmentsDiv: React.FC<DepartmentsDivProps> = ({
   const [reponseDept, setResponseDept] = useState<string>("");
   const [reponseDesc, setResponseDesc] = useState<string>("");
   const [reponseOffice, setResponseOffice] = useState<string>("");
+  const [randomName, setRandomName] = useState(generateRandomName());
+  function generateRandomName(): string {
+    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    const length = 5;
+    const randomValues = new Uint32Array(length);
+    window.crypto.getRandomValues(randomValues);
+    let randomName = "";
+    for (let i = 0; i < length; i++) {
+      randomName += characters.charAt(randomValues[i] % characters.length);
+    }
+    return randomName;
+  }
   useEffect(() => {
     if (socket) {
       socket.on("response", (res: response) => {
@@ -46,6 +58,9 @@ const DepartmentsDiv: React.FC<DepartmentsDivProps> = ({
       });
     }
   }, [socket]);
+  useEffect(() => {
+    setRandomName(generateRandomName());
+  }, []);
   useEffect(() => {
     async function getDepartments() {
       try {
@@ -72,7 +87,7 @@ const DepartmentsDiv: React.FC<DepartmentsDivProps> = ({
     onClick();
   };
   const createTicket = async (id: number) => {
-    socket?.emit("create_ticket", { name: "Lemzgo", department: id });
+    socket?.emit("create_ticket", { name: randomName, department: id });
     setIsModalOpen(true);
   };
   if (loading) {

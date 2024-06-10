@@ -40,12 +40,12 @@ const WindowContainer: React.FC<WindowContainerProps> = ({ id }) => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 min-h-screen items-center p-2">
+    <div>
       <h1 className="text-4xl">Window {id}</h1>
       <div>
         {tickets.map((ticket) => (
           <p className="text-lg" key={ticket.id}>
-            {ticket.id} - {ticket.name}
+            {ticket.name}
           </p>
         ))}
       </div>
