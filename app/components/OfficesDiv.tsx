@@ -30,16 +30,22 @@ const OfficesDiv: React.FC<OfficesDivProps> = ({ onClick }) => {
     return <OfficesSkeleton />;
   }
   return (
-    <div className="grid grid-cols-3 gap-4">
-      {offices.map((office) => (
-        <button
-          className="btn btn-primary w-44"
-          key={office.id}
-          onClick={() => onClick(office.id)}
-        >
-          {office.name}
-        </button>
-      ))}
+    <div className="flex flex-col justify-center gap-y-10">
+      <ul className="steps">
+        <li className="step step-primary">Select desired Office</li>
+        <li className="step ">Select a Window</li>
+      </ul>
+      <div className="grid grid-cols-3 gap-4">
+        {offices.map((office) => (
+          <button
+            className="btn btn-primary w-44"
+            key={office.id}
+            onClick={() => onClick(office.id)}
+          >
+            {office.name}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

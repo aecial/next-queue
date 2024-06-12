@@ -8,7 +8,6 @@ const page = () => {
     <div className="text-white h-screen flex flex-col  items-center gap-4 p-4">
       <h1 className="text-4xl">Kiosk</h1>
       <div className="divider"></div>
-      <h2 className="text-xl">SELECT DESIRED OFFICE:</h2>
       <div>
         <KioskInformationContainer />
       </div>
