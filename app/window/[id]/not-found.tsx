@@ -8,7 +8,7 @@ export default function NotFound({
   link: string;
 }) {
   return (
-    <div className="w-screen h-screen flex flex-col justify-center items-center">
+    <div className="w-screen h-[100vh-56px] flex flex-col justify-center items-center">
       <h1 className="text-4xl">Not found – 404!</h1>
       <div className="divider"></div>
       <div>
