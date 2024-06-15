@@ -1,7 +1,12 @@
 import React from "react";
+import DepartmentsList from "../components/DepartmentsList";
 
 const page = () => {
-  return <div>Welcome to Window Page</div>;
+  return (
+    <div>
+      <DepartmentsList />
+    </div>
+  );
 };
 
 export default page;

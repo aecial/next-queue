@@ -22,7 +22,13 @@ const OfficeCard = ({ data }: { data: data }) => {
       <h1 className="text-4xl">{data.name}</h1>
       <div className="divider"></div>
       {data.department.map((window: department) => {
-        return <ServingCard winNum={window.name} ticket={window.now_serving} />;
+        return (
+          <ServingCard
+            key={window.id}
+            winNum={window.name}
+            ticket={window.now_serving}
+          />
+        );
       })}
     </div>
   );
