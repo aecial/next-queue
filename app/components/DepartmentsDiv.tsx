@@ -79,6 +79,12 @@ const DepartmentsDiv: React.FC<DepartmentsDivProps> = ({
 
     getDepartments();
   }, [selectedOfficeId]);
+  const goBack = () => {
+    setLoading(true);
+    setTimeout(() => {
+      onClick();
+    }, 100);
+  };
   const closeModal = () => {
     setResponseName("");
     setResponseDesc("");
@@ -100,67 +106,76 @@ const DepartmentsDiv: React.FC<DepartmentsDivProps> = ({
 
   return (
     <>
-      <div className="grid grid-cols-3 gap-4">
-        {departments.map((department) => (
-          <button
-            className="btn btn-primary w-44"
-            key={department.id}
-            onClick={() => createTicket(department.id)}
-          >
-            {department.name}
-          </button>
-        ))}
-      </div>
-      <div className="divider"></div>
-      <button className="btn btn-primary" onClick={onClick}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          className="size-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-          />
-        </svg>
-        Back
-      </button>
-      {isModalOpen && (
-        <dialog
-          id="my_modal_5"
-          className={"modal modal-open modal-bottom sm:modal-middle"}
-        >
-          <div className="modal-box bg-slate-100 text-black">
-            <h3 className="font-bold text-4xl text-center">
-              {reponseOffice} OFFICE
-            </h3>
-            <div className="divider"></div>
-            <h3 className="font-bold text-center mt-10 text-2xl text-red-500">
-              Window: {reponseDept}
-            </h3>
-            <h2 className="py-4 mt-4 text-[50px] border-2 border-black text-center">
-              {reponseName}
-            </h2>
-            <h3 className="font-bold text-center mt-4 text-xl">
-              Purpose: {reponseDesc}
-            </h3>
-            <div className="modal-action">
-              <form method="dialog">
-                <button
-                  className="btn btn-success text-white"
-                  onClick={closeModal}
-                >
-                  Close
-                </button>
-              </form>
-            </div>
+      <div className="flex flex-col justify-center gap-y-10">
+        <ul className="steps">
+          <li className="step step-primary">Select desired Office</li>
+          <li className="step step-primary">Select a Window</li>
+        </ul>
+
+        <div>
+          <div className="grid grid-cols-3 gap-4">
+            {departments.map((department) => (
+              <button
+                className="btn btn-primary w-44"
+                key={department.id}
+                onClick={() => createTicket(department.id)}
+              >
+                {department.name}
+              </button>
+            ))}
           </div>
-        </dialog>
-      )}
+          <div className="divider"></div>
+          <button className="btn btn-primary" onClick={goBack}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+              />
+            </svg>
+            Back
+          </button>
+          {isModalOpen && (
+            <dialog
+              id="my_modal_5"
+              className={"modal modal-open modal-bottom sm:modal-middle"}
+            >
+              <div className="modal-box bg-slate-100 text-black">
+                <h3 className="font-bold text-4xl text-center">
+                  {reponseOffice} OFFICE
+                </h3>
+                <div className="divider"></div>
+                <h3 className="font-bold text-center mt-10 text-2xl text-red-500">
+                  Window: {reponseDept}
+                </h3>
+                <h2 className="py-4 mt-4 text-[50px] border-2 border-black text-center">
+                  {reponseName}
+                </h2>
+                <h3 className="font-bold text-center mt-4 text-xl">
+                  Purpose: {reponseDesc}
+                </h3>
+                <div className="modal-action">
+                  <form method="dialog">
+                    <button
+                      className="btn btn-success text-white"
+                      onClick={closeModal}
+                    >
+                      Close
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </dialog>
+          )}
+        </div>
+      </div>
     </>
   );
 };
