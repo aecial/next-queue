@@ -6,10 +6,9 @@ let socket: Socket<DefaultEventsMap, DefaultEventsMap> | null = null;
 
 export const useSocket = () => {
   const [isConnected, setIsConnected] = useState(false);
-
   useEffect(() => {
     if (!socket) {
-      socket = io("http://localhost:3000", {
+      socket = io(process.env.LOCALHOST_URL || "", {
         transports: ["websocket"],
         reconnection: true,
       });
