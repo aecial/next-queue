@@ -95,7 +95,7 @@ const ReportContainer = () => {
     );
     const response = await reportByMonth.json();
     try {
-      setSince(response.since.createdAt);
+      setSince(response.since[0].createdAt);
       console.log(since);
       setReportCount(response.reportCount);
       setAverageServiceTime(response.reportAverage._avg.service_time);
