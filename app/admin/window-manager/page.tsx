@@ -1,3 +1,4 @@
+import WindowManagerNavigations from "@/app/components/WindowManagerNavigations";
 import WindowTable from "@/app/components/WindowTable";
 import prisma from "@lib/PrismaProvider";
 import { revalidatePath } from "next/cache";
@@ -12,12 +13,16 @@ const windowManager = async () => {
         },
       },
     },
+    orderBy: {
+      officeId: "asc",
+    },
   });
 
   return (
     <div className="w-screen min-h-screen p-2">
       <h1 className="text-4xl text-center">Window Manager</h1>
       <div>
+        <WindowManagerNavigations />
         <WindowTable windows={windows} />
       </div>
     </div>
