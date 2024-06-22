@@ -1,3 +1,5 @@
+import UsersTableRow from "./UsersTableRow";
+
 interface Office {
   id: number;
   name: string;
@@ -24,15 +26,8 @@ const UsersTable: React.FC<UserTableProps> = ({ users }) => {
           </tr>
         </thead>
         <tbody>
-          {/* {windows.map((window) => (
-            <WindowTableRow key={window.id} window={window} />
-          ))} */}
           {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.username}</td>
-              <td>{user.office.name}</td>
-            </tr>
+            <UsersTableRow key={user.id} user={user} />
           ))}
         </tbody>
       </table>
