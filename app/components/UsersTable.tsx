@@ -7,8 +7,8 @@ interface Office {
 type user = {
   id: number;
   username: string;
-  officeId: number | null;
-  office: Office | null;
+  officeId: number;
+  office: Office;
 };
 interface UserTableProps {
   users: user[];

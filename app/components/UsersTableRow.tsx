@@ -5,8 +5,8 @@ import { deleteUser } from "@/actions/user/deleteUser";
 type user = {
   id: number;
   username: string;
-  officeId: number | null;
-  office: Office | null;
+  officeId: number;
+  office: Office;
 };
 interface Office {
   id: number;
@@ -86,7 +86,7 @@ const UsersTableRow: React.FC<RowProps> = ({ user }) => {
                   <input
                     type="hidden"
                     name="officeId"
-                    defaultValue={user?.office?.id}
+                    defaultValue={user.office.id}
                   />
                   <div className="modal-action">
                     <button
@@ -118,7 +118,7 @@ const UsersTableRow: React.FC<RowProps> = ({ user }) => {
                 </h3>
                 <div className="divider"></div>
                 <form
-                  //   onSubmit={handleSubmitDelete}
+                  onSubmit={handleSubmitDelete}
                   className="flex flex-col gap-4 w-full"
                 >
                   <input type="hidden" name="id" defaultValue={user.id} />
