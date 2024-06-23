@@ -5,8 +5,8 @@ import { deleteUser } from "@/actions/user/deleteUser";
 type user = {
   id: number;
   username: string;
-  officeId: number;
-  office: Office;
+  officeId: number | null;
+  office: Office | null;
 };
 interface Office {
   id: number;
@@ -86,7 +86,7 @@ const UsersTableRow: React.FC<RowProps> = ({ user }) => {
                   <input
                     type="hidden"
                     name="officeId"
-                    defaultValue={user.office.id}
+                    defaultValue={user?.office?.id}
                   />
                   <div className="modal-action">
                     <button
