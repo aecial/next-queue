@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { addWindow } from "@/actions/addWindow";
+import { addWindow } from "@/actions/window/addWindow";
 import { useRouter } from "next/navigation";
 type Office = {
   id: number;
