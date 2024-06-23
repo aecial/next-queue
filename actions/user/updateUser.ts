@@ -14,18 +14,28 @@ export const updateUser = async (formData: FormData) => {
 
       if (!isNaN(id) && !isNaN(officeId)) {
         const username = formData.get("username") as string | null;
-
-        const updatedUser = await prisma.user.update({
-          where: { id: id },
-          data: {
-            username: username ?? undefined,
-            password: String(passValue) ?? undefined,
-            officeId: officeId,
-          },
-        });
-
-        console.log("Update User successful:", updatedUser);
-        revalidatePath("/admin/user-manager");
+        if (passValue === undefined || passValue === null || passValue === "") {
+          const updatedUser = await prisma.user.update({
+            where: { id: id },
+            data: {
+              username: username ?? undefined,
+              officeId: officeId,
+            },
+          });
+          console.log("Update User successful:", updatedUser);
+          revalidatePath("/admin/user-manager");
+        } else {
+          const updatedUser = await prisma.user.update({
+            where: { id: id },
+            data: {
+              username: username ?? undefined,
+              password: String(passValue) ?? undefined,
+              officeId: officeId,
+            },
+          });
+          console.log("Update User successful:", updatedUser);
+          revalidatePath("/admin/user-manager");
+        }
       } else {
         console.error("Invalid ID or officeId: Not a number");
       }

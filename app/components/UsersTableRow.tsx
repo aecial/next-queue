@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { updateUser } from "@/actions/user/updateUser";
+import { deleteUser } from "@/actions/user/deleteUser";
 type user = {
   id: number;
   username: string;
@@ -14,6 +16,29 @@ interface RowProps {
   user: user;
 }
 const UsersTableRow: React.FC<RowProps> = ({ user }) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      await updateUser(formData);
+      setEditOpen(!editOpen);
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
+  };
+  const handleSubmitDelete = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+
+    try {
+      await deleteUser(formData);
+      setDeleteOpen(false);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
+  };
+
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   return (
@@ -37,33 +62,32 @@ const UsersTableRow: React.FC<RowProps> = ({ user }) => {
                 </h3>
                 <div className="divider"></div>
                 <form
-                  //   onSubmit={handleSubmit}
+                  onSubmit={handleSubmit}
                   className="flex flex-col gap-4 w-full"
                 >
-                  {/* <input type="hidden" name="id" defaultValue={window.id} />
+                  <input type="hidden" name="id" defaultValue={user.id} />
                   <label className="form-control w-full">
-                    <span className="label-text">Window Name:</span>
+                    <span className="label-text">Username:</span>
                     <input
                       type="text"
-                      name="name"
+                      name="username"
                       className="input input-bordered w-full"
-                      defaultValue={window.name}
+                      defaultValue={user.username}
                     />
                   </label>
                   <label className="form-control w-full">
-                    <span className="label-text">Description:</span>
+                    <span className="label-text">New Password:</span>
                     <input
                       type="text"
-                      name="description"
+                      name="password"
                       className="input input-bordered w-full"
-                      defaultValue={window.description}
                     />
                   </label>
                   <input
                     type="hidden"
                     name="officeId"
-                    defaultValue={window.office.id}
-                  /> */}
+                    defaultValue={user?.office?.id}
+                  />
                   <div className="modal-action">
                     <button
                       className="btn"
