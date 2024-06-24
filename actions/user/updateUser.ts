@@ -1,7 +1,7 @@
 "use server";
 import prisma from "@lib/PrismaProvider";
 import { revalidatePath } from "next/cache";
-
+import bcrypt from "bcrypt";
 export const updateUser = async (formData: FormData) => {
   try {
     const idValue = formData.get("id");
@@ -25,11 +25,12 @@ export const updateUser = async (formData: FormData) => {
           console.log("Update User successful:", updatedUser);
           revalidatePath("/admin/user-manager");
         } else {
+          const hashedPassword = await bcrypt.hash(String(passValue), 10);
           const updatedUser = await prisma.user.update({
             where: { id: id },
             data: {
               username: username ?? undefined,
-              password: String(passValue) ?? undefined,
+              password: hashedPassword ?? undefined,
               officeId: officeId,
             },
           });

@@ -41,6 +41,8 @@ const UsersTableRow: React.FC<RowProps> = ({ user }) => {
 
   const [editOpen, setEditOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [password, setPassword] = useState("");
+  const [confPassword, setConfPassword] = useState("");
   return (
     <>
       <tr key={user.id}>
@@ -73,13 +75,26 @@ const UsersTableRow: React.FC<RowProps> = ({ user }) => {
                       name="username"
                       className="input input-bordered w-full"
                       defaultValue={user.username}
+                      required
                     />
                   </label>
                   <label className="form-control w-full">
                     <span className="label-text">New Password:</span>
                     <input
-                      type="text"
+                      type="password"
                       name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="input input-bordered w-full"
+                    />
+                  </label>
+                  <label className="form-control w-full">
+                    <span className="label-text">Confirm New Password:</span>
+                    <input
+                      type="password"
+                      name="conf_password"
+                      value={confPassword}
+                      onChange={(e) => setConfPassword(e.target.value)}
                       className="input input-bordered w-full"
                     />
                   </label>
@@ -96,7 +111,15 @@ const UsersTableRow: React.FC<RowProps> = ({ user }) => {
                     >
                       Close
                     </button>
-                    <button className="btn btn-primary" type="submit">
+                    <button
+                      className="btn btn-primary"
+                      type="submit"
+                      disabled={
+                        password !== confPassword ||
+                        password === "" ||
+                        confPassword === ""
+                      }
+                    >
                       Submit
                     </button>
                   </div>
