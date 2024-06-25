@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { updateWindow } from "@/actions/updateWindow"; // Import the server action
-import { deleteWindow } from "@/actions/deleteWindow";
+import { updateWindow } from "@/actions/window/updateWindow";
+import { deleteWindow } from "@/actions/window/deleteWindow";
 
 interface Office {
   id: number;
