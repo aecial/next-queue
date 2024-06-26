@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSocket } from "@hooks/useSocket";
+import TransferModal from "./TransferModal";
 
 interface WindowContainerProps {
   id: number;
@@ -26,6 +27,7 @@ const WindowContainer: React.FC<WindowContainerProps> = ({ id }) => {
   const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const [now, setNow] = useState<string>("");
   const [departmentProperties, setDepartmentProperties] = useState<string>("");
+  const [transferOpen, setTransferOpen] = useState(false);
 
   async function getTickets() {
     const data = await fetch(`/api/tickets/${id}`);
@@ -131,13 +133,32 @@ const WindowContainer: React.FC<WindowContainerProps> = ({ id }) => {
   return (
     <div className="flex flex-col gap-5 w-screen p-2">
       <h1 className="text-4xl text-center">Window {departmentProperties}</h1>
-      <div className="stats shadow w-64 h-32 mx-auto">
-        <div className="stat">
-          <div className="stat-title text-secondary">Now Serving:</div>
-          <div className="stat-value text-success text-center">{now}</div>
+      <div className="flex justify-center items-center gap-10 ">
+        <div className="stats shadow w-64 h-32 ml-[130px]">
+          <div className="stat">
+            <div className="stat-title text-secondary">Now Serving:</div>
+            <div className="stat-value text-success text-center">{now}</div>
+          </div>
         </div>
+        {now === "" ? (
+          <button className="invisible btn btn-primary w-20 ">Transfer</button>
+        ) : (
+          <button
+            className="btn btn-primary w-20 "
+            onClick={() => setTransferOpen(true)}
+          >
+            Transfer
+          </button>
+        )}
       </div>
-
+      {transferOpen && (
+        <TransferModal
+          windowId={id}
+          closeTransfer={() => setTransferOpen(false)}
+          handleClick={handleClick}
+          now={now}
+        />
+      )}
       <div className="border border-white h-96 overflow-y-scroll">
         {tickets.map((ticket) => (
           <div key={ticket.id}>
