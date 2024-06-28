@@ -10,7 +10,6 @@ export const addUser = async (formData: FormData) => {
     const officeId = formData.get("officeId");
 
     const hashedPassword = await bcrypt.hash(String(password), 10);
-
     const add = await prisma.user.create({
       data: {
         username: String(name),
