@@ -1,15 +1,11 @@
-// components/AdminLayout.tsx
-
-import { session } from "@utils/session";
 import { redirect } from "next/navigation";
-
+import { cookies } from "next/headers";
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
 const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
-  const isSessionValid = session;
-  if (!isSessionValid) {
+  if (!cookies().get("userId")) {
     redirect("/login");
   }
 

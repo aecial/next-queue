@@ -1,19 +1,18 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { session } from "@/utils/session";
 interface Department {
   id: number;
   name: string;
   officeId: number;
 }
-const DepartmentsList = () => {
+const DepartmentsList = ({ officeId }: { officeId: number }) => {
   const router = useRouter();
   const [departments, setDepartments] = useState<Department[]>([]);
   const [loading, setLoading] = useState(true);
   const getDepartments = async () => {
     try {
-      const departments = await fetch(`/api/departments/${session.officeId}`);
+      const departments = await fetch(`/api/departments/${officeId}`);
       const response = await departments.json();
       setDepartments(response.departments);
     } catch (error) {

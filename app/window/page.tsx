@@ -1,10 +1,12 @@
 import React from "react";
 import DepartmentsList from "../components/DepartmentsList";
-
+import { cookies } from "next/headers";
 const page = () => {
+  const officeId = Number(cookies()?.get("officeId")?.value);
+  console.log(officeId);
   return (
     <div>
-      <DepartmentsList />
+      <DepartmentsList officeId={officeId} />
     </div>
   );
 };
