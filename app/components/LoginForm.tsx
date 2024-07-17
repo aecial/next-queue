@@ -1,10 +1,15 @@
 "use client";
 import { useState } from "react";
+import { loginUser } from "@/actions/user/loginUser";
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const handleSubmit = (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    loginUser(username, password);
+  };
   return (
-    <form className="flex flex-col gap-10">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-10">
       <label className="input input-bordered flex items-center gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"

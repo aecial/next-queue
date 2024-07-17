@@ -1,11 +1,7 @@
 import React from "react";
 import AdminCard from "../components/AdminCard";
-import { session } from "@/utils/session";
 import { redirect } from "next/navigation";
 const adminPage = () => {
-  if (!session) {
-    redirect("/login");
-  }
   return (
     <div className="h-screen w-screen flex flex-col justify-center items-center gap-10">
       <h1 className="text-4xl">Admin Functions</h1>
