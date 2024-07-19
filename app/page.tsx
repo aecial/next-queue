@@ -1,5 +1,6 @@
-import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <main>Hello World</main>;
+  redirect("/kiosk");
+  // return <main>Hello World</main>;
 }

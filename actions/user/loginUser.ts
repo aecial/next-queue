@@ -12,7 +12,7 @@ export const loginUser = async (username: string, password: string) => {
     select: {
       id: true,
       username: true,
-      password: true, // Assuming you have the hashed password stored in the database
+      password: true,
       office: {
         select: {
           id: true,
