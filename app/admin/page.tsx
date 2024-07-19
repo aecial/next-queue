@@ -3,7 +3,7 @@ import AdminCard from "../components/AdminCard";
 import { redirect } from "next/navigation";
 const adminPage = () => {
   return (
-    <div className="h-screen w-screen flex flex-col justify-center items-center gap-10">
+    <div className="h-[calc(100vh-4rem)] w-screen flex flex-col justify-center items-center gap-10">
       <h1 className="text-4xl">Admin Functions</h1>
       <div className="flex gap-10">
         <AdminCard
