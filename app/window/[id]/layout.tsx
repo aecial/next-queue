@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { logoutUser } from "@/actions/user/logoutUser";
 export default function WindowLayout({
   children,
 }: {
@@ -11,7 +11,9 @@ export default function WindowLayout({
         <Link href={"/window"} className="btn btn-primary text-white">
           Back
         </Link>
-        <button className="btn btn-primary text-white">Logout</button>
+        <form action={logoutUser}>
+          <button className="btn btn-primary text-white">Logout</button>
+        </form>
       </div>
       {children}
     </div>
