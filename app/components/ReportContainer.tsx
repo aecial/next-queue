@@ -27,7 +27,7 @@ const ReportContainer = () => {
     try {
       const initReport = await fetch("/api/reports");
       const response = await initReport.json();
-      const offices = await fetch("api/offices/names");
+      const offices = await fetch("/api/offices/names");
       const officeResponse = await offices.json();
       setOfficeNames(officeResponse.offices);
       setSince(response.since.createdAt);

@@ -25,7 +25,7 @@ const userManager = async () => {
     },
   });
   return (
-    <div className="w-screen min-h-screen p-2">
+    <div className="w-screen min-h-[calc(100vh-4rem)] p-2">
       <h1 className="text-4xl text-center">User Manager</h1>
       <div>
         <UserManagerNavigations />
