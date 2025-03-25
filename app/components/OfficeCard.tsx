@@ -15,11 +15,8 @@ interface data {
 }
 const OfficeCard = ({ data }: { data: data }) => {
   return (
-    <div
-      key={data.id}
-      className="border border-yellow-500 p-2 w-[450px] mx-auto"
-    >
-      <h1 className="text-4xl">{data.name}</h1>
+    <div key={data.id} className="border-2 border-black p-2 w-[450px] mx-auto">
+      <h1 className="text-4xl font-semibold">{data.name}</h1>
       <div className="divider"></div>
       {data.department.map((window: department) => {
         return (
