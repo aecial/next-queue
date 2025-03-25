@@ -67,7 +67,9 @@ const WindowManagerNavigations = () => {
                 <span className="label-text">Select Office:</span>
                 <select name="officeId" className="input input-bordered w-full">
                   {offices.map((office) => (
-                    <option value={office.id}>{office.name}</option>
+                    <option key={office.id} value={office.id}>
+                      {office.name}
+                    </option>
                   ))}
                 </select>
               </label>
